@@ -120,6 +120,19 @@ public class NotificareUtils {
         return deviceMap;
     }
 
+    public static JSONObject mapSystemNotification(NotificareSystemNotification notification) throws JSONException {
+        JSONObject notificationMap = new JSONObject();
+        notificationMap.put("id", notification.getNotificationId());
+        if (notification.getExtra() != null) {
+            JSONObject extraMap = new JSONObject();
+            for (HashMap.Entry<String, String> prop : notification.getExtra().entrySet()) {
+                extraMap.put(prop.getKey(), prop.getValue());
+            }
+            notificationMap.put("extra", extraMap);
+        }
+        return notificationMap;
+    }
+
     /**
      * Map a notification
      * @param notification

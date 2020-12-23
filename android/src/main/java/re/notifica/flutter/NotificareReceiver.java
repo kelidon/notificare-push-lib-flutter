@@ -14,6 +14,16 @@ import re.notifica.model.NotificareDevice;
 import re.notifica.model.NotificareNotification;
 
 public class NotificareReceiver extends DefaultIntentReceiver {
+
+    @Override
+    public void onSystemNotificationReceived(NotificareSystemNotification notification) {
+        try {
+            NotificareEventEmitter.getInstance().sendEvent("systemNotificationReceivedInForeground", NotificareUtils.mapSystemNotification(notification), true);
+        } catch (JSONException e) {
+            // ignore
+        }
+    }
+
     @Override
     public void onReady() {
         // Event is emitted by the onReady listener in the module
